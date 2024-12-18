@@ -15,22 +15,17 @@ import {
  */
 export const createTable = pgTableCreator((name) => `closet-book_${name}`);
 
-export const garmentType = pgEnum('garment_type', [
-  'suit',
-  'jacket',
-  'trousers',
-  'tie',
-  'pocket_square',
-  'shirt',
-  'shoe'
+export const garmentType = pgEnum("garment_type", [
+  "suit",
+  "jacket",
+  "trousers",
+  "tie",
+  "pocket_square",
+  "shirt",
+  "shoe",
 ]);
 
-export const season = pgEnum('season', [
-  'spring',
-  'summer',
-  'fall',
-  'winter'
-]);
+export const season = pgEnum("season", ["spring", "summer", "fall", "winter"]);
 
 export const garments = createTable(
   "garment",
@@ -47,25 +42,24 @@ export const garments = createTable(
     typeIndex: index("garment_type_idx").on(garment.type),
     // colorIndex: index("garment_color_idx").on(garment.color),
     styleSeasonIndex: index("garment_style_season_idx").on(garment.styleSeason),
-    weatherSeasonIndex: index("garment_weather_season_idx").on(garment.weatherSeason),
-  })
+    weatherSeasonIndex: index("garment_weather_season_idx").on(
+      garment.weatherSeason,
+    ),
+  }),
 );
 
-export const outfits = createTable(
-  "outfit",
-  {
-    id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
-    jacketId: integer("jacket_id").references(() => garments.id),
-    trousersId: integer("trousers_id").references(() => garments.id),
-    shirtId: integer("shirt_id").references(() => garments.id),
-    tieId: integer("tie_id").references(() => garments.id),
-    pocketSquareId: integer("pocket_square_id").references(() => garments.id),
-    shoeId: integer("shoe_id").references(() => garments.id),
-  }
-);
+export const outfits = createTable("outfit", {
+  id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
+  jacketId: integer("jacket_id").references(() => garments.id),
+  trousersId: integer("trousers_id").references(() => garments.id),
+  shirtId: integer("shirt_id").references(() => garments.id),
+  tieId: integer("tie_id").references(() => garments.id),
+  pocketSquareId: integer("pocket_square_id").references(() => garments.id),
+  shoeId: integer("shoe_id").references(() => garments.id),
+});
 
-export const entry = createTable(
-  "entry",
+export const entries = createTable(
+  "entries",
   {
     id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
     outfitId: integer("outfit_id").references(() => outfits.id),
@@ -74,5 +68,5 @@ export const entry = createTable(
   (entry) => ({
     outfitIdIndex: index("outfit_id_idx").on(entry.outfitId),
     dateIndex: index("date_idx").on(entry.date),
-  })
+  }),
 );
