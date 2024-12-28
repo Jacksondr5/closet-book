@@ -1,73 +1,48 @@
 {
-  "id": "4e7c9886-e964-42f5-bded-3720b39449f6",
+  "version": "5",
+  "dialect": "mysql",
+  "id": "06c94bfa-0eb0-41c0-91e3-8e5264f930e8",
   "prevId": "00000000-0000-0000-0000-000000000000",
-  "version": "7",
-  "dialect": "postgresql",
   "tables": {
-    "public.closet-book_entries": {
+    "closet-book_entries": {
       "name": "closet-book_entries",
-      "schema": "",
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
-          "primaryKey": true,
+          "type": "int",
+          "primaryKey": false,
           "notNull": true,
-          "identity": {
-            "type": "byDefault",
-            "name": "closet-book_entries_id_seq",
-            "schema": "public",
-            "increment": "1",
-            "startWith": "1",
-            "minValue": "1",
-            "maxValue": "2147483647",
-            "cache": "1",
-            "cycle": false
-          }
+          "autoincrement": true
         },
         "outfit_id": {
           "name": "outfit_id",
-          "type": "integer",
+          "type": "int",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "autoincrement": false
         },
         "date": {
           "name": "date",
           "type": "date",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "autoincrement": false
         }
       },
       "indexes": {
         "outfit_id_idx": {
           "name": "outfit_id_idx",
           "columns": [
-            {
-              "expression": "outfit_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
+            "outfit_id"
           ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
+          "isUnique": false
         },
         "date_idx": {
           "name": "date_idx",
           "columns": [
-            {
-              "expression": "date",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
+            "date"
           ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
+          "isUnique": false
         }
       },
       "foreignKeys": {
@@ -85,177 +60,149 @@
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "compositePrimaryKeys": {
+        "closet-book_entries_id": {
+          "name": "closet-book_entries_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
     },
-    "public.closet-book_garment": {
+    "closet-book_garment": {
       "name": "closet-book_garment",
-      "schema": "",
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
-          "primaryKey": true,
+          "type": "int",
+          "primaryKey": false,
           "notNull": true,
-          "identity": {
-            "type": "byDefault",
-            "name": "closet-book_garment_id_seq",
-            "schema": "public",
-            "increment": "1",
-            "startWith": "1",
-            "minValue": "1",
-            "maxValue": "2147483647",
-            "cache": "1",
-            "cycle": false
-          }
+          "autoincrement": true
         },
         "name": {
           "name": "name",
           "type": "varchar(256)",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "autoincrement": false
         },
-        "type": {
-          "name": "type",
-          "type": "garment_type",
-          "typeSchema": "public",
+        "garment_type": {
+          "name": "garment_type",
+          "type": "enum('suit','jacket','trousers','tie','pocket_square','shirt','shoe')",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "autoincrement": false
         },
         "color": {
           "name": "color",
           "type": "varchar(7)",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "autoincrement": false
         },
         "quantity": {
           "name": "quantity",
-          "type": "integer",
+          "type": "int",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "autoincrement": false
         },
-        "style_season": {
-          "name": "style_season",
-          "type": "season",
-          "typeSchema": "public",
+        "season": {
+          "name": "season",
+          "type": "enum('spring','summer','fall','winter')",
           "primaryKey": false,
-          "notNull": true
-        },
-        "weather_season": {
-          "name": "weather_season",
-          "type": "season",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "autoincrement": false
         }
       },
       "indexes": {
         "garment_type_idx": {
           "name": "garment_type_idx",
           "columns": [
-            {
-              "expression": "type",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
+            "garment_type"
           ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
+          "isUnique": false
         },
         "garment_style_season_idx": {
           "name": "garment_style_season_idx",
           "columns": [
-            {
-              "expression": "style_season",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
+            "season"
           ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
+          "isUnique": false
         },
         "garment_weather_season_idx": {
           "name": "garment_weather_season_idx",
           "columns": [
-            {
-              "expression": "weather_season",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
+            "season"
           ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
+          "isUnique": false
         }
       },
       "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "compositePrimaryKeys": {
+        "closet-book_garment_id": {
+          "name": "closet-book_garment_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
     },
-    "public.closet-book_outfit": {
+    "closet-book_outfit": {
       "name": "closet-book_outfit",
-      "schema": "",
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
-          "primaryKey": true,
+          "type": "int",
+          "primaryKey": false,
           "notNull": true,
-          "identity": {
-            "type": "byDefault",
-            "name": "closet-book_outfit_id_seq",
-            "schema": "public",
-            "increment": "1",
-            "startWith": "1",
-            "minValue": "1",
-            "maxValue": "2147483647",
-            "cache": "1",
-            "cycle": false
-          }
+          "autoincrement": true
         },
         "jacket_id": {
           "name": "jacket_id",
-          "type": "integer",
+          "type": "int",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "autoincrement": false
         },
         "trousers_id": {
           "name": "trousers_id",
-          "type": "integer",
+          "type": "int",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "autoincrement": false
         },
         "shirt_id": {
           "name": "shirt_id",
-          "type": "integer",
+          "type": "int",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "autoincrement": false
         },
         "tie_id": {
           "name": "tie_id",
-          "type": "integer",
+          "type": "int",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "autoincrement": false
         },
         "pocket_square_id": {
           "name": "pocket_square_id",
-          "type": "integer",
+          "type": "int",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "autoincrement": false
         },
         "shoe_id": {
           "name": "shoe_id",
-          "type": "integer",
+          "type": "int",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -339,40 +286,26 @@
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "compositePrimaryKeys": {
+        "closet-book_outfit_id": {
+          "name": "closet-book_outfit_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
     }
   },
-  "enums": {
-    "public.garment_type": {
-      "name": "garment_type",
-      "schema": "public",
-      "values": [
-        "suit",
-        "jacket",
-        "trousers",
-        "tie",
-        "pocket_square",
-        "shirt",
-        "shoe"
-      ]
-    },
-    "public.season": {
-      "name": "season",
-      "schema": "public",
-      "values": [
-        "spring",
-        "summer",
-        "fall",
-        "winter"
-      ]
-    }
-  },
-  "schemas": {},
-  "sequences": {},
+  "views": {},
   "_meta": {
-    "columns": {},
     "schemas": {},
-    "tables": {}
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "tables": {},
+    "indexes": {}
   }
 }

@@ -1,11 +1,11 @@
 import {
   index,
-  integer,
-  pgTableCreator,
+  int,
+  mysqlTableCreator,
   varchar,
-  pgEnum,
+  mysqlEnum,
   date,
-} from "drizzle-orm/pg-core";
+} from "drizzle-orm/mysql-core";
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -13,9 +13,10 @@ import {
  *
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
-export const createTable = pgTableCreator((name) => `closet-book_${name}`);
+export const createTable = mysqlTableCreator((name) => `closet-book_${name}`);
 
-export const garmentType = pgEnum("garment_type", [
+export const seasons = ["spring", "summer", "fall", "winter"] as const;
+export const garmentTypes = [
   "suit",
   "jacket",
   "trousers",
@@ -23,20 +24,18 @@ export const garmentType = pgEnum("garment_type", [
   "pocket_square",
   "shirt",
   "shoe",
-]);
-
-export const season = pgEnum("season", ["spring", "summer", "fall", "winter"]);
+] as const;
 
 export const garments = createTable(
   "garment",
   {
-    id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
+    id: int("id").primaryKey().autoincrement(),
     name: varchar("name", { length: 256 }).notNull(),
-    type: garmentType("type").notNull(),
+    type: mysqlEnum("garment_type", garmentTypes).notNull(),
     color: varchar("color", { length: 7 }).notNull(),
-    quantity: integer("quantity").notNull(),
-    styleSeason: season("style_season").array().notNull(),
-    weatherSeason: season("weather_season").array().notNull(),
+    quantity: int("quantity").notNull(),
+    styleSeason: mysqlEnum("style_season", seasons).notNull(),
+    weatherSeason: mysqlEnum("weather_season", seasons).notNull(),
   },
   (garment) => [
     index("garment_type_idx").on(garment.type),
@@ -47,20 +46,20 @@ export const garments = createTable(
 );
 
 export const outfits = createTable("outfit", {
-  id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
-  jacketId: integer("jacket_id").references(() => garments.id),
-  trousersId: integer("trousers_id").references(() => garments.id),
-  shirtId: integer("shirt_id").references(() => garments.id),
-  tieId: integer("tie_id").references(() => garments.id),
-  pocketSquareId: integer("pocket_square_id").references(() => garments.id),
-  shoeId: integer("shoe_id").references(() => garments.id),
+  id: int("id").primaryKey().autoincrement(),
+  jacketId: int("jacket_id").references(() => garments.id),
+  trousersId: int("trousers_id").references(() => garments.id),
+  shirtId: int("shirt_id").references(() => garments.id),
+  tieId: int("tie_id").references(() => garments.id),
+  pocketSquareId: int("pocket_square_id").references(() => garments.id),
+  shoeId: int("shoe_id").references(() => garments.id),
 });
 
 export const entries = createTable(
   "entries",
   {
-    id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
-    outfitId: integer("outfit_id").references(() => outfits.id),
+    id: int("id").primaryKey().autoincrement(),
+    outfitId: int("outfit_id").references(() => outfits.id),
     date: date("date").notNull(),
   },
   (entry) => [

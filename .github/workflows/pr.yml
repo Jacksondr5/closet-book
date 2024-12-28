@@ -8,7 +8,7 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     env:
-      DATABASE_URL: postgresql://postgres:password@localhost:5432/closet-book
+      DATABASE_URL: mysql://user:password@localhost:3306/closet_book
     steps:
       - uses: actions/checkout@v4
 
