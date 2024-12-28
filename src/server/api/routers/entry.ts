@@ -25,10 +25,10 @@ export const entryRouter = createTRPCRouter({
       const conditions = [];
 
       if (input.startDate) {
-        conditions.push(gte(entries.date, input.startDate.toISOString()));
+        conditions.push(gte(entries.date, input.startDate));
       }
       if (input.endDate) {
-        conditions.push(lte(entries.date, input.endDate.toISOString()));
+        conditions.push(lte(entries.date, input.endDate));
       }
 
       const offset = (input.page - 1) * PAGE_SIZE;
@@ -73,14 +73,10 @@ export const entryRouter = createTRPCRouter({
   create: publicProcedure
     .input(createEntryInputSchema)
     .mutation(async ({ ctx, input }) => {
-      const [entry] = await ctx.db
-        .insert(entries)
-        .values({
-          date: input.date.toISOString(),
-          outfitId: input.outfitId,
-        })
-        .returning();
-
-      return entry;
+      const [entry] = await ctx.db.insert(entries).values({
+        date: input.date,
+        outfitId: input.outfitId,
+      });
+      return entry.insertId;
     }),
 });

@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "06c94bfa-0eb0-41c0-91e3-8e5264f930e8",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "36ebe00e-61d0-4814-8987-196755275709",
+  "prevId": "06c94bfa-0eb0-41c0-91e3-8e5264f930e8",
   "tables": {
     "closet-book_entries": {
       "name": "closet-book_entries",
@@ -109,8 +109,15 @@
           "notNull": true,
           "autoincrement": false
         },
-        "season": {
-          "name": "season",
+        "style_season": {
+          "name": "style_season",
+          "type": "enum('spring','summer','fall','winter')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "weather_season": {
+          "name": "weather_season",
           "type": "enum('spring','summer','fall','winter')",
           "primaryKey": false,
           "notNull": true,
@@ -128,14 +135,14 @@
         "garment_style_season_idx": {
           "name": "garment_style_season_idx",
           "columns": [
-            "season"
+            "style_season"
           ],
           "isUnique": false
         },
         "garment_weather_season_idx": {
           "name": "garment_weather_season_idx",
           "columns": [
-            "season"
+            "weather_season"
           ],
           "isUnique": false
         }

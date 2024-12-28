@@ -4,9 +4,8 @@ import { env } from "~/env";
 
 export default {
   schema: "./src/server/db/schema.ts",
-  dialect: "postgresql",
+  dialect: "mysql",
   dbCredentials: {
     url: env.DATABASE_URL,
   },
-  tablesFilter: ["closet-book_*"],
 } satisfies Config;

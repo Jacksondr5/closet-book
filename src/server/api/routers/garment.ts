@@ -2,22 +2,22 @@ import { z } from "zod";
 import { desc, eq, and } from "drizzle-orm";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { garments, garmentType, season } from "~/server/db/schema";
+import { garments, garmentTypes, seasons } from "~/server/db/schema";
 
 // Input validation schemas
 const getGarmentsInputSchema = z.object({
-  type: z.enum(garmentType.enumValues).optional(),
-  weatherSeason: z.enum(season.enumValues).optional(),
-  styleSeason: z.enum(season.enumValues).optional(),
+  type: z.enum(garmentTypes).optional(),
+  weatherSeason: z.enum(seasons).optional(),
+  styleSeason: z.enum(seasons).optional(),
 });
 
 export const createGarmentInputSchema = z.object({
   name: z.string().min(1).max(256),
-  type: z.enum(garmentType.enumValues),
+  type: z.enum(garmentTypes),
   color: z.string().regex(/^#[0-9A-F]{6}$/i, "Must be a valid hex color"),
   quantity: z.number().int().positive(),
-  styleSeason: z.enum(season.enumValues),
-  weatherSeason: z.enum(season.enumValues),
+  styleSeason: z.enum(seasons),
+  weatherSeason: z.enum(seasons),
 });
 
 export const garmentRouter = createTRPCRouter({
@@ -45,8 +45,8 @@ export const garmentRouter = createTRPCRouter({
   create: publicProcedure
     .input(createGarmentInputSchema)
     .mutation(async ({ ctx, input }) => {
-      const [garment] = await ctx.db.insert(garments).values(input).returning();
+      const [garment] = await ctx.db.insert(garments).values(input);
 
-      return garment;
+      return garment.insertId;
     }),
 });
