@@ -1,5 +1,5 @@
 import { drizzle } from "drizzle-orm/mysql2";
-import mysql from "mysql2/promise";
+import { createPool, type Pool } from "mysql2/promise";
 
 import { env } from "~/env";
 import * as schema from "./schema";
@@ -9,11 +9,10 @@ import * as schema from "./schema";
  * update.
  */
 const globalForDb = globalThis as unknown as {
-  conn: mysql.Connection | undefined;
+  conn: Pool | undefined;
 };
 
-const conn =
-  globalForDb.conn ?? (await mysql.createConnection(env.DATABASE_URL));
+const conn = globalForDb.conn ?? createPool({ uri: env.DATABASE_URL });
 if (env.NODE_ENV !== "production") globalForDb.conn = conn;
 
 export const db = drizzle(conn, { schema, mode: "default" });
