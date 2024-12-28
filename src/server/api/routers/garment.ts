@@ -11,7 +11,7 @@ const getGarmentsInputSchema = z.object({
   styleSeason: z.enum(season.enumValues).optional(),
 });
 
-const createGarmentInputSchema = z.object({
+export const createGarmentInputSchema = z.object({
   name: z.string().min(1).max(256),
   type: z.enum(garmentType.enumValues),
   color: z.string().regex(/^#[0-9A-F]{6}$/i, "Must be a valid hex color"),
