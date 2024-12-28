@@ -7,8 +7,8 @@ import { garments, garmentType, season } from "~/server/db/schema";
 // Input validation schemas
 const getGarmentsInputSchema = z.object({
   type: z.enum(garmentType.enumValues).optional(),
-  weatherSeason: z.enum(season.enumValues).optional(),
-  styleSeason: z.enum(season.enumValues).optional(),
+  weatherSeason: z.enum(season.enumValues).array().optional(),
+  styleSeason: z.enum(season.enumValues).array().optional(),
 });
 
 export const createGarmentInputSchema = z.object({
@@ -16,8 +16,8 @@ export const createGarmentInputSchema = z.object({
   type: z.enum(garmentType.enumValues),
   color: z.string().regex(/^#[0-9A-F]{6}$/i, "Must be a valid hex color"),
   quantity: z.number().int().positive(),
-  styleSeason: z.enum(season.enumValues),
-  weatherSeason: z.enum(season.enumValues),
+  styleSeason: z.enum(season.enumValues).array(),
+  weatherSeason: z.enum(season.enumValues).array(),
 });
 
 export const garmentRouter = createTRPCRouter({

@@ -35,17 +35,15 @@ export const garments = createTable(
     type: garmentType("type").notNull(),
     color: varchar("color", { length: 7 }).notNull(),
     quantity: integer("quantity").notNull(),
-    styleSeason: season("style_season").notNull(),
-    weatherSeason: season("weather_season").notNull(),
+    styleSeason: season("style_season").array().notNull(),
+    weatherSeason: season("weather_season").array().notNull(),
   },
-  (garment) => ({
-    typeIndex: index("garment_type_idx").on(garment.type),
-    // colorIndex: index("garment_color_idx").on(garment.color),
-    styleSeasonIndex: index("garment_style_season_idx").on(garment.styleSeason),
-    weatherSeasonIndex: index("garment_weather_season_idx").on(
-      garment.weatherSeason,
-    ),
-  }),
+  (garment) => [
+    index("garment_type_idx").on(garment.type),
+    // index("garment_color_idx").on(garment.color),
+    index("garment_style_season_idx").on(garment.styleSeason),
+    index("garment_weather_season_idx").on(garment.weatherSeason),
+  ],
 );
 
 export const outfits = createTable("outfit", {
@@ -65,8 +63,8 @@ export const entries = createTable(
     outfitId: integer("outfit_id").references(() => outfits.id),
     date: date("date").notNull(),
   },
-  (entry) => ({
-    outfitIdIndex: index("outfit_id_idx").on(entry.outfitId),
-    dateIndex: index("date_idx").on(entry.date),
-  }),
+  (entry) => [
+    index("outfit_id_idx").on(entry.outfitId),
+    index("date_idx").on(entry.date),
+  ],
 );
