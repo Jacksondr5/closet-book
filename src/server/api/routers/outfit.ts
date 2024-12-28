@@ -66,8 +66,8 @@ export const outfitRouter = createTRPCRouter({
   create: publicProcedure
     .input(createOutfitInputSchema)
     .mutation(async ({ ctx, input }) => {
-      const [outfit] = await ctx.db.insert(outfits).values(input).returning();
+      const [outfit] = await ctx.db.insert(outfits).values(input);
 
-      return outfit;
+      return outfit.insertId;
     }),
 });
