@@ -41,7 +41,7 @@ export function ColorSelect({ type, value, onValueChange }: ColorSelectProps) {
   const colors = getColorsForType(type);
 
   return (
-    <Select value={value}>
+    <Select value={value} onValueChange={onValueChange}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Select a color" />
       </SelectTrigger>
