@@ -1,3 +1,5 @@
+"use server";
+
 import { drizzle } from "drizzle-orm/mysql2";
 import { createPool, type Pool } from "mysql2/promise";
 

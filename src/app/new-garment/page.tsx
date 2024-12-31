@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { type z } from "zod";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -15,19 +15,12 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "~/components/ui/select";
-import { ColorSelect } from "~/components/color-select";
+import { ColorGroup } from "~/components/color-group";
 import { useToast } from "~/hooks/use-toast";
 import { api } from "~/trpc/react";
-import { createGarmentInputSchema } from "~/server/api/routers/garment";
-import { garmentType, season } from "~/server/db/schema";
+import { createGarmentInputSchema } from "~/server/api/zod";
 import { SeasonGroup } from "~/components/season-group";
+import { GarmentTypeGroup } from "~/components/garment-type-group";
 
 type FormData = z.infer<typeof createGarmentInputSchema>;
 
@@ -39,6 +32,7 @@ export default function NewGarmentPage() {
     resolver: zodResolver(createGarmentInputSchema),
     defaultValues: {
       quantity: 1,
+      type: "jacket",
     },
   });
 
@@ -86,20 +80,13 @@ export default function NewGarmentPage() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Type</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select type" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {garmentType.enumValues.map((type) => (
-                      <SelectItem key={type} value={type}>
-                        {type.charAt(0).toUpperCase() + type.slice(1)}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <FormControl>
+                  <GarmentTypeGroup
+                    type="single"
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
@@ -112,14 +99,9 @@ export default function NewGarmentPage() {
               <FormItem>
                 <FormLabel>Color</FormLabel>
                 <FormControl>
-                  <ColorSelect
-                    type={
-                      form.watch("type") as
-                        | "jacket"
-                        | "shirt"
-                        | "trousers"
-                        | "shoes"
-                    }
+                  <ColorGroup
+                    type="single"
+                    garmentType={form.watch("type")}
                     value={field.value}
                     onValueChange={field.onChange}
                   />
@@ -151,7 +133,7 @@ export default function NewGarmentPage() {
           <div className="grid grid-cols-2 gap-6">
             <FormField
               control={form.control}
-              name="styleSeason"
+              name="styleSeasons"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Style Season</FormLabel>
@@ -169,7 +151,7 @@ export default function NewGarmentPage() {
 
             <FormField
               control={form.control}
-              name="weatherSeason"
+              name="weatherSeasons"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Weather Season</FormLabel>

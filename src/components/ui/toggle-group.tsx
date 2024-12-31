@@ -14,7 +14,66 @@ const ToggleGroupContext = React.createContext<
   variant: "default",
 });
 
-const ToggleGroup = React.forwardRef<
+export type SingleToggleGroupProps = {
+  type: "single";
+  onValueChange: (value: string) => void;
+  value: string;
+};
+
+export type MultipleToggleGroupProps = {
+  type: "multiple";
+  onValueChange: (value: string[]) => void;
+  value: string[];
+};
+
+export type CombinedToggleGroupProps = (
+  | SingleToggleGroupProps
+  | MultipleToggleGroupProps
+) & {
+  className?: string;
+};
+
+export type ToggleGroupProps = CombinedToggleGroupProps & {
+  items: React.ReactNode;
+};
+
+const ToggleGroup = ({
+  type,
+  onValueChange,
+  value,
+  items,
+  ...props
+}: ToggleGroupProps) => {
+  // For some reason, type inference isn't working, so we need to help
+  // the compiler out.
+  if (type === "single") {
+    return (
+      <ToggleGroupImpl
+        type={type}
+        onValueChange={onValueChange}
+        value={value}
+        {...props}
+      >
+        {items}
+      </ToggleGroupImpl>
+    );
+  }
+
+  return (
+    <ToggleGroupImpl
+      type={type}
+      onValueChange={onValueChange}
+      value={value}
+      {...props}
+    >
+      {items}
+    </ToggleGroupImpl>
+  );
+};
+
+ToggleGroup.displayName = "ToggleGroup";
+
+const ToggleGroupImpl = React.forwardRef<
   React.ElementRef<typeof ToggleGroupPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &
     VariantProps<typeof toggleVariants>
@@ -30,7 +89,7 @@ const ToggleGroup = React.forwardRef<
   </ToggleGroupPrimitive.Root>
 ));
 
-ToggleGroup.displayName = ToggleGroupPrimitive.Root.displayName;
+ToggleGroupImpl.displayName = ToggleGroupPrimitive.Root.displayName;
 
 const ToggleGroupItem = React.forwardRef<
   React.ElementRef<typeof ToggleGroupPrimitive.Item>,
