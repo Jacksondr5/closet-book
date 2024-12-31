@@ -5,6 +5,7 @@ import {
   varchar,
   mysqlEnum,
   date,
+  json,
 } from "drizzle-orm/mysql-core";
 
 /**
@@ -16,6 +17,7 @@ import {
 export const createTable = mysqlTableCreator((name) => `closet-book_${name}`);
 
 export const seasons = ["spring", "summer", "fall", "winter"] as const;
+export type Season = (typeof seasons)[number];
 export const garmentTypes = [
   "suit",
   "jacket",
@@ -25,6 +27,7 @@ export const garmentTypes = [
   "shirt",
   "shoe",
 ] as const;
+export type GarmentType = (typeof garmentTypes)[number];
 
 export const garments = createTable(
   "garment",
@@ -34,14 +37,12 @@ export const garments = createTable(
     type: mysqlEnum("garment_type", garmentTypes).notNull(),
     color: varchar("color", { length: 7 }).notNull(),
     quantity: int("quantity").notNull(),
-    styleSeason: mysqlEnum("style_season", seasons).notNull(),
-    weatherSeason: mysqlEnum("weather_season", seasons).notNull(),
+    styleSeasons: json("style_seasons").$type<Season[]>().notNull(),
+    weatherSeasons: json("weather_seasons").$type<Season[]>().notNull(),
   },
   (garment) => [
     index("garment_type_idx").on(garment.type),
-    // colorIndex: index("garment_color_idx").on(garment.color),
-    index("garment_style_season_idx").on(garment.styleSeason),
-    index("garment_weather_season_idx").on(garment.weatherSeason),
+    // index("garment_color_idx").on(garment.color),
   ],
 );
 

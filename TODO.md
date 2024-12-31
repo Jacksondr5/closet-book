@@ -1,8 +1,19 @@
-- [ ] Add demo functionality to make it work in CI and Vercel
-- [ ] Add E2E tests
+# TODO
+
+## MVP
+
 - [ ] Add UI to add a garment
 - [ ] Add UI to add an outfit
 - [ ] Add UI to create an entry
 - [ ] Add UI to review past entries
 - [ ] Add UI to view a garment & its outfits/uses
 - [ ] Add UI to view an outfit & its uses
+
+## Needed to share
+
+- [ ] Add demo functionality to make it work in CI and Vercel
+- [ ] Add E2E tests
+- [ ] Deploy to Vercel
+- [ ] Add a check for desktop and display a QR code to open on mobile
+- [ ] Add a project description page to explain things
+- [ ] Add PostHog
