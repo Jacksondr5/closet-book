@@ -6,4 +6,3 @@ export const Overcoat = (props: SVGProps<SVGSVGElement>) => (
     <path d="M272.02 264h-.01a8.005 8.005 0 1 0 .01 0M272.02 328h-.01a8.005 8.005 0 1 0 .01 0M272.02 392h-.01a8.005 8.005 0 1 0 .01 0" />
   </svg>
 );
-

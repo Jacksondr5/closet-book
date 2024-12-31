@@ -8,4 +8,3 @@ export const Belt = (props: SVGProps<SVGSVGElement>) => (
     <circle cx={296} cy={280} r={8} />
   </svg>
 );
-

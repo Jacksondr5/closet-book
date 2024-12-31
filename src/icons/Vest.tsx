@@ -8,4 +8,3 @@ export const Vest = (props: SVGProps<SVGSVGElement>) => (
     <circle cx={264} cy={360} r={8} />
   </svg>
 );
-

@@ -9,4 +9,3 @@ export const Shirt = (props: SVGProps<SVGSVGElement>) => (
     <circle cx={288} cy={416} r={8} />
   </svg>
 );
-

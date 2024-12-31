@@ -11,4 +11,3 @@ export const Suit = (props: SVGProps<SVGSVGElement>) => (
     </g>
   </svg>
 );
-
