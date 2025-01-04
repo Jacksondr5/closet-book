@@ -1,3 +1,5 @@
+import { oliveDark } from "@radix-ui/colors";
+
 export const colorCategories = ["Neutrals", "Warms", "Cools", "Other"] as const;
 export type ColorCategory = (typeof colorCategories)[number];
 
@@ -8,178 +10,181 @@ export type ColorOption = {
   textColor: string;
 };
 
+const darkText = oliveDark.olive1;
+const lightText = oliveDark.olive12;
+
 export const allColors = {
   // Neutrals
   white: {
     category: "Neutrals",
     name: "White",
     value: "#FFFFFF",
-    textColor: "#000000",
+    textColor: darkText,
   },
   lightGrey: {
     category: "Neutrals",
     name: "Light Grey",
     value: "#D3D3D3",
-    textColor: "#000000",
+    textColor: darkText,
   },
   midGrey: {
     category: "Neutrals",
     name: "Mid Grey",
     value: "#808080",
-    textColor: "#000000",
+    textColor: darkText,
   },
   darkGrey: {
     category: "Neutrals",
     name: "Dark Grey",
     value: "#404040",
-    textColor: "#FFFFFF",
+    textColor: lightText,
   },
   charcoal: {
     category: "Neutrals",
     name: "Charcoal",
     value: "#36454F",
-    textColor: "#FFFFFF",
+    textColor: lightText,
   },
   // Warms
   offWhite: {
     category: "Warms",
     name: "Off White",
     value: "#FAF9F6",
-    textColor: "#000000",
+    textColor: darkText,
   },
   cream: {
     category: "Warms",
     name: "Cream",
     value: "#FFFDD0",
-    textColor: "#000000",
+    textColor: darkText,
   },
   tan: {
     category: "Warms",
     name: "Tan",
     value: "#D2B48C",
-    textColor: "#000000",
+    textColor: darkText,
   },
   camel: {
     category: "Warms",
     name: "Camel",
     value: "#C19A6B",
-    textColor: "#000000",
+    textColor: darkText,
   },
   yellow: {
     category: "Warms",
     name: "Yellow",
     value: "#FFD700",
-    textColor: "#000000",
+    textColor: darkText,
   },
   lightPink: {
     category: "Warms",
     name: "Light Pink",
     value: "#FFB6C1",
-    textColor: "#000000",
+    textColor: darkText,
   },
   darkRed: {
     category: "Warms",
     name: "Dark Red",
     value: "#8B0000",
-    textColor: "#FFFFFF",
+    textColor: lightText,
   },
   burgundy: {
     category: "Warms",
     name: "Burgundy",
     value: "#800020",
-    textColor: "#FFFFFF",
+    textColor: lightText,
   },
   lightBrown: {
     category: "Warms",
     name: "Light Brown",
     value: "#B5651D",
-    textColor: "#000000",
+    textColor: darkText,
   },
   midBrown: {
     category: "Warms",
     name: "Mid Brown",
     value: "#964B00",
-    textColor: "#FFFFFF",
+    textColor: lightText,
   },
   darkBrown: {
     category: "Warms",
     name: "Dark Brown",
     value: "#654321",
-    textColor: "#FFFFFF",
+    textColor: lightText,
   },
   // Cools
   skyBlue: {
     category: "Cools",
     name: "Sky Blue",
     value: "#87CEEB",
-    textColor: "#000000",
+    textColor: darkText,
   },
   lightBlue: {
     category: "Cools",
     name: "Light Blue",
     value: "#ADD8E6",
-    textColor: "#000000",
+    textColor: darkText,
   },
   slate: {
     category: "Cools",
     name: "Slate",
     value: "#708090",
-    textColor: "#FFFFFF",
+    textColor: lightText,
   },
   royalBlue: {
     category: "Cools",
     name: "Royal Blue",
     value: "#4169E1",
-    textColor: "#FFFFFF",
+    textColor: lightText,
   },
   navy: {
     category: "Cools",
     name: "Navy",
     value: "#000080",
-    textColor: "#FFFFFF",
+    textColor: lightText,
   },
   darkNavy: {
     category: "Cools",
     name: "Dark Navy",
     value: "#000033",
-    textColor: "#FFFFFF",
+    textColor: lightText,
   },
   sageGreen: {
     category: "Cools",
     name: "Sage Green",
     value: "#98BA85",
-    textColor: "#000000",
+    textColor: darkText,
   },
   oliveGreen: {
     category: "Cools",
     name: "Olive Green",
     value: "#808000",
-    textColor: "#000000",
+    textColor: darkText,
   },
   forestGreen: {
     category: "Cools",
     name: "Forest Green",
     value: "#228B22",
-    textColor: "#FFFFFF",
+    textColor: lightText,
   },
   lavender: {
     category: "Cools",
     name: "Lavender",
     value: "#E6E6FA",
-    textColor: "#000000",
+    textColor: darkText,
   },
   purple: {
     category: "Cools",
     name: "Purple",
     value: "#800080",
-    textColor: "#FFFFFF",
+    textColor: lightText,
   },
   // Other Colors
   black: {
     category: "Other",
     name: "Black",
     value: "#000000",
-    textColor: "#FFFFFF",
+    textColor: lightText,
   },
 } as const satisfies Record<string, ColorOption>;
 

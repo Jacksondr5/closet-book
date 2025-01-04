@@ -12,8 +12,8 @@ import { Shirt } from "~/icons/Shirt";
 import { OxfordShoe } from "~/icons/OxfordShoe";
 
 const garmentTypeItems = (
-  <>
-    <ToggleGroupItem value="suit" aria-label="Suit">
+  <div className="text-olive-12">
+    <ToggleGroupItem value="suit" aria-label="Suit" size="lg">
       <Suit />
     </ToggleGroupItem>
     <ToggleGroupItem value="jacket" aria-label="Jacket">
@@ -26,7 +26,6 @@ const garmentTypeItems = (
       <Tie />
     </ToggleGroupItem>
     <ToggleGroupItem value="pocket_square" aria-label="Pocket Square">
-      {/* <PocketSquare /> */}
       Pocket Square
     </ToggleGroupItem>
     <ToggleGroupItem value="shirt" aria-label="Shirt">
@@ -35,7 +34,7 @@ const garmentTypeItems = (
     <ToggleGroupItem value="shoe" aria-label="Shoe">
       <OxfordShoe />
     </ToggleGroupItem>
-  </>
+  </div>
 );
 
 export function GarmentTypeGroup({

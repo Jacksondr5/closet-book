@@ -51,17 +51,19 @@ const ColorItems = ({ colors }: { colors: ColorOption[] }) => {
     {} as Record<ColorCategory, ColorOption[]>,
   );
   return Object.entries(groups).map(([category, colors]) => (
-    <div key={category}>
-      <p>{category}</p>
-      {colors.map((color) => (
-        <ToggleGroupItem
-          key={color.name}
-          value={color.name}
-          style={{ backgroundColor: color.value, color: color.textColor }}
-        >
-          {color.name}
-        </ToggleGroupItem>
-      ))}
+    <div className="flex flex-col justify-center gap-2" key={category}>
+      <h3 className="text-center text-olive-12">{category}</h3>
+      <div className="">
+        {colors.map((color) => (
+          <ToggleGroupItem
+            key={color.name}
+            value={color.name}
+            style={{ backgroundColor: color.value, color: color.textColor }}
+          >
+            {color.name}
+          </ToggleGroupItem>
+        ))}
+      </div>
     </div>
   ));
 };

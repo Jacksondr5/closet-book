@@ -52,8 +52,8 @@ export default function NewGarmentPage() {
   });
 
   return (
-    <div className="container py-10">
-      <h1 className="mb-8 text-3xl font-bold">Add New Garment</h1>
+    <div className="container px-4 py-10">
+      <h1 className="mb-8 text-3xl font-bold text-olive-12">Add New Garment</h1>
 
       <Form {...form}>
         <form
@@ -135,8 +135,8 @@ export default function NewGarmentPage() {
               control={form.control}
               name="styleSeasons"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Style Season</FormLabel>
+                <FormItem className="flex flex-col">
+                  <FormLabel className="text-center">Style Season</FormLabel>
                   <FormControl>
                     <SeasonGroup
                       type="multiple"
@@ -153,8 +153,8 @@ export default function NewGarmentPage() {
               control={form.control}
               name="weatherSeasons"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Weather Season</FormLabel>
+                <FormItem className="flex flex-col">
+                  <FormLabel className="text-center">Weather Season</FormLabel>
                   <FormControl>
                     <SeasonGroup
                       type="multiple"
