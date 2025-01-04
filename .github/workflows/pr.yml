@@ -10,7 +10,8 @@ jobs:
     env:
       DATABASE_URL: mysql://user:password@localhost:3306/closet_book
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
