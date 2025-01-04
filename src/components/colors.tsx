@@ -1,41 +1,191 @@
+import { oliveDark } from "@radix-ui/colors";
+
+export const colorCategories = ["Neutrals", "Warms", "Cools", "Other"] as const;
+export type ColorCategory = (typeof colorCategories)[number];
+
 export type ColorOption = {
+  category: ColorCategory;
   name: string;
   value: string;
+  textColor: string;
 };
+
+const darkText = oliveDark.olive1;
+const lightText = oliveDark.olive12;
 
 export const allColors = {
   // Neutrals
-  white: { name: "White", value: "#FFFFFF" },
-  lightGrey: { name: "Light Grey", value: "#D3D3D3" },
-  midGrey: { name: "Mid Grey", value: "#808080" },
-  darkGrey: { name: "Dark Grey", value: "#404040" },
-  charcoal: { name: "Charcoal", value: "#36454F" },
+  white: {
+    category: "Neutrals",
+    name: "White",
+    value: "#FFFFFF",
+    textColor: darkText,
+  },
+  lightGrey: {
+    category: "Neutrals",
+    name: "Light Grey",
+    value: "#D3D3D3",
+    textColor: darkText,
+  },
+  midGrey: {
+    category: "Neutrals",
+    name: "Mid Grey",
+    value: "#808080",
+    textColor: darkText,
+  },
+  darkGrey: {
+    category: "Neutrals",
+    name: "Dark Grey",
+    value: "#404040",
+    textColor: lightText,
+  },
+  charcoal: {
+    category: "Neutrals",
+    name: "Charcoal",
+    value: "#36454F",
+    textColor: lightText,
+  },
   // Warms
-  offWhite: { name: "Off White", value: "#FAF9F6" },
-  cream: { name: "Cream", value: "#FFFDD0" },
-  tan: { name: "Tan", value: "#D2B48C" },
-  camel: { name: "Camel", value: "#C19A6B" },
-  yellow: { name: "Yellow", value: "#FFD700" },
-  lightPink: { name: "Light Pink", value: "#FFB6C1" },
-  darkRed: { name: "Dark Red", value: "#8B0000" },
-  burgundy: { name: "Burgundy", value: "#800020" },
-  lightBrown: { name: "Light Brown", value: "#B5651D" },
-  midBrown: { name: "Mid Brown", value: "#964B00" },
-  darkBrown: { name: "Dark Brown", value: "#654321" },
+  offWhite: {
+    category: "Warms",
+    name: "Off White",
+    value: "#FAF9F6",
+    textColor: darkText,
+  },
+  cream: {
+    category: "Warms",
+    name: "Cream",
+    value: "#FFFDD0",
+    textColor: darkText,
+  },
+  tan: {
+    category: "Warms",
+    name: "Tan",
+    value: "#D2B48C",
+    textColor: darkText,
+  },
+  camel: {
+    category: "Warms",
+    name: "Camel",
+    value: "#C19A6B",
+    textColor: darkText,
+  },
+  yellow: {
+    category: "Warms",
+    name: "Yellow",
+    value: "#FFD700",
+    textColor: darkText,
+  },
+  lightPink: {
+    category: "Warms",
+    name: "Light Pink",
+    value: "#FFB6C1",
+    textColor: darkText,
+  },
+  darkRed: {
+    category: "Warms",
+    name: "Dark Red",
+    value: "#8B0000",
+    textColor: lightText,
+  },
+  burgundy: {
+    category: "Warms",
+    name: "Burgundy",
+    value: "#800020",
+    textColor: lightText,
+  },
+  lightBrown: {
+    category: "Warms",
+    name: "Light Brown",
+    value: "#B5651D",
+    textColor: darkText,
+  },
+  midBrown: {
+    category: "Warms",
+    name: "Mid Brown",
+    value: "#964B00",
+    textColor: lightText,
+  },
+  darkBrown: {
+    category: "Warms",
+    name: "Dark Brown",
+    value: "#654321",
+    textColor: lightText,
+  },
   // Cools
-  skyBlue: { name: "Sky Blue", value: "#87CEEB" },
-  lightBlue: { name: "Light Blue", value: "#ADD8E6" },
-  slate: { name: "Slate", value: "#708090" },
-  royalBlue: { name: "Royal Blue", value: "#4169E1" },
-  navy: { name: "Navy", value: "#000080" },
-  darkNavy: { name: "Dark Navy", value: "#000033" },
-  sageGreen: { name: "Sage Green", value: "#98BA85" },
-  oliveGreen: { name: "Olive Green", value: "#808000" },
-  forestGreen: { name: "Forest Green", value: "#228B22" },
-  lavender: { name: "Lavender", value: "#E6E6FA" },
-  purple: { name: "Purple", value: "#800080" },
+  skyBlue: {
+    category: "Cools",
+    name: "Sky Blue",
+    value: "#87CEEB",
+    textColor: darkText,
+  },
+  lightBlue: {
+    category: "Cools",
+    name: "Light Blue",
+    value: "#ADD8E6",
+    textColor: darkText,
+  },
+  slate: {
+    category: "Cools",
+    name: "Slate",
+    value: "#708090",
+    textColor: lightText,
+  },
+  royalBlue: {
+    category: "Cools",
+    name: "Royal Blue",
+    value: "#4169E1",
+    textColor: lightText,
+  },
+  navy: {
+    category: "Cools",
+    name: "Navy",
+    value: "#000080",
+    textColor: lightText,
+  },
+  darkNavy: {
+    category: "Cools",
+    name: "Dark Navy",
+    value: "#000033",
+    textColor: lightText,
+  },
+  sageGreen: {
+    category: "Cools",
+    name: "Sage Green",
+    value: "#98BA85",
+    textColor: darkText,
+  },
+  oliveGreen: {
+    category: "Cools",
+    name: "Olive Green",
+    value: "#808000",
+    textColor: darkText,
+  },
+  forestGreen: {
+    category: "Cools",
+    name: "Forest Green",
+    value: "#228B22",
+    textColor: lightText,
+  },
+  lavender: {
+    category: "Cools",
+    name: "Lavender",
+    value: "#E6E6FA",
+    textColor: darkText,
+  },
+  purple: {
+    category: "Cools",
+    name: "Purple",
+    value: "#800080",
+    textColor: lightText,
+  },
   // Other Colors
-  black: { name: "Black", value: "#000000" },
+  black: {
+    category: "Other",
+    name: "Black",
+    value: "#000000",
+    textColor: lightText,
+  },
 } as const satisfies Record<string, ColorOption>;
 
 export const jacketColors = [

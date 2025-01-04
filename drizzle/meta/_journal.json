@@ -15,6 +15,13 @@
       "when": 1735418527016,
       "tag": "0001_violet_havok",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1735422193585,
+      "tag": "0002_luxuriant_living_mummy",
+      "breakpoints": true
     }
   ]
 }
