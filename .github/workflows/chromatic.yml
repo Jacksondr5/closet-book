@@ -34,4 +34,5 @@ jobs:
       - name: Run Chromatic
         uses: chromaui/action@latest
         with:
+          buildCommand: "pnpm storybook:build"
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
