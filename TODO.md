@@ -17,3 +17,7 @@
 - [ ] Add a check for desktop and display a QR code to open on mobile
 - [ ] Add a project description page to explain things
 - [ ] Add PostHog
+
+## Nice to have
+
+- [ ] Migrate Storybook to Vite
